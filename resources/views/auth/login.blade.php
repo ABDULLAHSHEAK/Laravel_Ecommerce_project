@@ -80,7 +80,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>Laravel E-commerce Project </title>
 
     <!-- Bootstrap -->
     <link href="{{asset('admin/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -172,19 +172,43 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
-              <h1>Create Account</h1>
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+              <h1>{{__('Create Account')}}</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="text" placeholder="Username" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus />
+                  @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
+                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+
+              </div> <br>
+              <div>
+               <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
               </div>
 
               <div class="clearfix"></div>
@@ -205,7 +229,6 @@
             </form>
           </section>
         </div>
-
       </div>
     </div>
   </body>
